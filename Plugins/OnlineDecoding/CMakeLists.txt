@@ -1,0 +1,61 @@
+#plugin build file
+cmake_minimum_required(VERSION 3.5.0)
+
+#include common rules
+include(../PluginRules.cmake)
+
+#add sources, not including OpenEphysLib.cpp
+add_sources(${PLUGIN_NAME}
+	ClusterDecoder/ClusterDecoderProcessor.cpp
+	ClusterDecoder/ClusterDecoderProcessor.h
+	ClusterDecoder/ClusterDecoderProcessorContentComponent.cpp
+	ClusterDecoder/ClusterDecoderProcessorContentComponent.h
+	ClusterDecoder/ClusterDecoderProcessorEditor.cpp
+	ClusterDecoder/ClusterDecoderProcessorEditor.h
+	ClusterDecoder/ClusterDecoderProcessorVisualizer.cpp
+	ClusterDecoder/ClusterDecoderProcessorVisualizer.h
+	ClusterDecoder/ClusterDecoderProcessorVisualizerContentComponent.cpp
+	ClusterDecoder/ClusterDecoderProcessorVisualizerContentComponent.h
+	ClusterDecoder/ClusterDecoderNetwork.cpp
+	ClusterDecoder/ClusterDecoderNetwork.h
+	json.h
+	jsoncpp.cpp
+	SleepScorer/SleepScorerProcessor.cpp
+	SleepScorer/SleepScorerProcessor.h
+	SleepScorer/SleepScorerProcessorContentComponent.cpp
+	SleepScorer/SleepScorerProcessorContentComponent.h
+	SleepScorer/SleepScorerProcessorEditor.cpp
+	SleepScorer/SleepScorerProcessorEditor.h
+	SleepScorer/SleepScorerProcessorVisualizer.cpp
+	SleepScorer/SleepScorerProcessorVisualizer.h
+	SleepScorer/SleepScorerProcessorVisualizerContentComponent.cpp
+	SleepScorer/SleepScorerProcessorVisualizerContentComponent.h
+	SleepScorer/SleepScorerFilter.cpp
+	SleepScorer/SleepScorerFilter.h
+	SpikeSorterWithStim/SpikeSorterWithStim.cpp
+	SpikeSorterWithStim/SpikeSorterWithStim.h
+	SpikeSorterWithStim/SpikeSortBoxesWithStim.cpp
+	SpikeSorterWithStim/SpikeSortBoxesWithStim.h
+	SpikeSorterWithStim/SpikeSorterEditorWithStim.cpp
+	SpikeSorterWithStim/SpikeSorterEditorWithStim.h
+	SpikeSorterWithStim/SpikeSorterCanvasWithStim.cpp
+	SpikeSorterWithStim/SpikeSorterCanvasWithStim.h
+	PositionDecoder/PositionDecoderProcessor.cpp
+	PositionDecoder/PositionDecoderProcessor.h
+	PositionDecoder/PositionDecoderProcessorContentComponent.cpp
+	PositionDecoder/PositionDecoderProcessorContentComponent.h
+	PositionDecoder/PositionDecoderProcessorEditor.cpp
+	PositionDecoder/PositionDecoderProcessorEditor.h
+	PositionDecoder/PositionDecoderProcessorVisualizer.cpp
+	PositionDecoder/PositionDecoderProcessorVisualizer.h
+	PositionDecoder/PositionDecoderProcessorVisualizerContentComponent.cpp
+	PositionDecoder/PositionDecoderProcessorVisualizerContentComponent.h
+	PositionDecoder/PositionDecoderNetwork.cpp
+	PositionDecoder/PositionDecoderNetwork.h
+	)
+
+LINK_DIRECTORIES(/usr/local/lib)
+TARGET_LINK_LIBRARIES(OnlineDecoding fir fftw3 tensorflow_cc tensorflow_framework)
+
+#optional: create IDE groups
+#plugin_create_filters()
