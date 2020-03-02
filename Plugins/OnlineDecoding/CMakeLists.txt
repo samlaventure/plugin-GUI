@@ -74,7 +74,9 @@ if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/fir1/CMakeLists.txt")
 endif()
 
 add_subdirectory(fir1)
+add_subdirectory(fftw-3.3.8)
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}/fir1")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}/fftw-3.3.8/api")
 LINK_DIRECTORIES(/usr/local/lib)
 TARGET_LINK_LIBRARIES(OnlineDecoding fir fftw3 tensorflow_cc tensorflow_framework)
 

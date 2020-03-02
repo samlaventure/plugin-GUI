@@ -108,7 +108,7 @@ void SleepScorerFilter::setFilter()
     if (filterType == UndeclaredRhythm) return;
 
     char  path[100] = "";
-    strcat(path,"../Plugins/SleepScorer/sleepScoringFilters/");
+    strcat(path,"../Plugins/OnlineDecoding/SleepScorer/sleepScoringFilters/");
 
     switch(filterType) {
     case UndeclaredRhythm:
