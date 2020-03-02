@@ -1,0 +1,3 @@
+[submodule "Plugins/OnlineDecoding/fir1"]
+	path = Plugins/OnlineDecoding/fir1
+	url = https://github.com/berndporr/fir1.git

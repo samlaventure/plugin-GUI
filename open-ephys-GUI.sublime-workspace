@@ -524,14 +524,7 @@
 			"settings":
 			{
 				"buffer_size": 7788,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Plugins/PluginRules.cmake",
-			"settings":
-			{
-				"buffer_size": 2615,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -587,12 +580,11 @@
 	},
 	"expanded_folders":
 	[
-		"/home/mobshamilton/OpenEphys/plugin-GUI",
-		"/home/mobshamilton/OpenEphys/plugin-GUI/Plugins",
-		"/home/mobshamilton/OpenEphys/plugin-GUI/Plugins/OnlineDecoding"
+		"/home/mobshamilton/OpenEphys/plugin-GUI"
 	],
 	"file_history":
 	[
+		"/home/mobshamilton/OpenEphys/plugin-GUI/Plugins/PluginRules.cmake",
 		"/home/mobshamilton/OpenEphys/plugin-GUI/open-ephys-GUI.sublime-project",
 		"/home/mobshamilton/OpenEphys/plugin-GUI/Plugins/OnlineDecoding/SpikeSorterWithStim/SpikeSortBoxesWithStim.cpp",
 		"/home/mobshamilton/OpenEphys/plugin-GUI/Build/open-ephys-GUI.sublime-project",
@@ -747,7 +739,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -763,8 +755,8 @@
 						"selection":
 						[
 							[
-								1310,
-								1310
+								7761,
+								7761
 							]
 						],
 						"settings":
@@ -773,43 +765,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2658.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "Plugins/PluginRules.cmake",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2615,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								881,
-								881
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CMake/CMake.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "Plugins/OnlineDecoding/CMakeLists.txt",
 					"semi_transient": false,
 					"settings":
@@ -821,8 +784,8 @@
 						"selection":
 						[
 							[
-								2422,
-								2422
+								869,
+								869
 							]
 						],
 						"settings":
@@ -831,10 +794,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 255.0,
+						"translation.y": 153.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
