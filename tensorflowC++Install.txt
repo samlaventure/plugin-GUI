@@ -1,0 +1,45 @@
+dependencies : 
+	sudo apt-get install pkg-config zip g++ zlib1g-dev unzip default-jdk autoconf automake libtool
+	sudo apt-get install python3-pip python3-numpy swig python3-dev
+	sudo pip3 install wheel
+
+install Bazel v0.21.0 (https://docs.bazel.build/versions/0.21.0/install-ubuntu.html)
+
+
+Now clone tensorflow github repo, select version 1.13, configure your build, and build:
+	git clone https://github.com/tensorflow/tensorflow.git
+	cd tensorflow
+	git checkout r1.13
+	./configure
+	bazel build -c opt //tensorflow:libtensorflow_cc.so
+
+Build proto:
+	mkdir /tmp/proto
+	tensorflow/contrib/makefile/download_dependencies.sh
+	cd tensorflow/contrib/makefile/downloads/protobuf
+	./autogen.sh
+	./configure --prefix=/tmp/proto/
+	make
+	make install
+Build eigen:
+	mkdir /tmp/eigen
+	cd ../eigen
+	mkdir build
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX=/tmp/eigen/ ../
+	make install
+	cd ../../../../../..
+
+to finish installing, you need to copy some files in /usr/local/lib and /usr/local/include (everything here is sudo)
+	mkdir /usr/local/include/tensorflow
+	cp -r tensorflow/cc /usr/local/include/tensorflow
+	cp -r tensorflow/core /usr/local/include/tensorflow
+	cp -r bazel-genfiles/* /usr/local/include
+	cp -r third_party /usr/local/include
+	cp -r /tmp/proto/include/* /usr/local/include
+	cp -r /tmp/eigen/include/eigen3/* /usr/local/include
+	cp -r tensorflow/contrib/makefile/downloads/absl/absl /usr/local/include
+
+	cp bazel-bin/tensorflow/libtensorflow_cc.so /usr/local/lib
+	cp bazel-bin/tensorflow/libtensorflow_framework.so /usr/local/lib
+	cp /tmp/proto/lib/libprotobuf.a /usr/local/lib
