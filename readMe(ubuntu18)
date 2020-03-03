@@ -19,8 +19,7 @@ A working version is available in ~/Dropbox/Kteam/intanMobsSource/proFileExample
 
 To use the OnlineDecoding library, 
 	git checkout onlineDecoding
-You need 2 libraries to compile and use this : 
-fftw3 (found easily, to compile with flag "-fPIC")
+You need a library to compile and use this : 
 tensorflow compiled for C++ (see tensorflowC++Install.txt)
 
 after that got to Build and rerun the cmake and make command !
