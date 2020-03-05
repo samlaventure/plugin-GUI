@@ -181,6 +181,7 @@ public:
 	ScopedPointer<SpikeSortBoxesWithStim> spikeSort;
     bool isMonitored;
 
+    bool isExcluded;
     long int internalClock;
     bool atLeastOneRealSpike = false;
     bool windowComplete = false;

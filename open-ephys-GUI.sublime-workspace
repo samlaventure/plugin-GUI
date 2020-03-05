@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"CMAKE_CURR",
+				"CMAKE_CURRENT_SOURCE_DIR\tbuiltin"
+			],
+			[
 				"position",
 				"positionProba"
 			],
@@ -510,10 +514,6 @@
 			[
 				"MOBSthede",
 				"MOBSthedelChannel"
-			],
-			[
-				"MOBSG",
-				"MOBSgammaChannel"
 			]
 		]
 	},
@@ -532,7 +532,19 @@
 			"file": "Plugins/OnlineDecoding/CMakeLists.txt",
 			"settings":
 			{
-				"buffer_size": 2595,
+				"buffer_size": 4171,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "cmake_minimum_required(VERSION 3.5.0)\n\nproject(open-ephys-plugins-tensorflow)\n\nfile(COPY ${CMAKE_CURRENT_SOURCE_DIR}/.bazelversion \n\t DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/tensorflow)\n# execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/tensorflow/tensorflow/contrib/makefile/download_dependencies.sh\n# \t\t\t\tWORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tensorflow)\nadd_custom_target(tensorflow\n\t\t\t\t   VERBATIM\n\t\t\t\t   COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/bazelisk/bazelisk.py build --action_env=\"commit=1\" //tensorflow:libtensorflow_cc.so\n\t\t\t\t   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tensorflow/tensorflow)\nadd_dependencies(open-ephys tensorflow)\n# add_dependencies(OnlineDecoding tensorflow)\n\nadd_custom_target(tf-dependencies\n\t\t\t\t\tCOMMAND ${CMAKE_CURRENT_SOURCE_DIR}/install_dependencies.sh\n\t\t\t\t\tWORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})\nadd_dependencies(tf-dependencies tensorflow)\nadd_dependencies(open-ephys tf-dependencies)\nadd_dependencies(OnlineDecoding tf-dependencies)\n\n\n# set(protobuf_BUILD_PROTOC_BINARIES OFF CACHE BOOL \"do not build protoc\")\n# add_subdirectory(tensorflow/tensorflow/contrib/makefile/downloads/protobuf/cmake)\n# add_dependencies(protobuf OnlineDecoding)\n# add_subdirectory(tensorflow/tensorflow/contrib/makefile/downloads/eigen EXCLUDE_FROM_ALL check)\n",
+			"file": "Plugins/OnlineDecoding/tensorflow/CMakeLists.txt",
+			"file_size": 1296,
+			"file_write_time": 132278170869627207,
+			"settings":
+			{
+				"buffer_size": 1296,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -580,10 +592,14 @@
 	},
 	"expanded_folders":
 	[
-		"/home/mobshamilton/OpenEphys/plugin-GUI"
+		"/home/mobshamilton/OpenEphys/plugin-GUI",
+		"/home/mobshamilton/OpenEphys/plugin-GUI/Plugins",
+		"/home/mobshamilton/OpenEphys/plugin-GUI/Plugins/OnlineDecoding",
+		"/home/mobshamilton/OpenEphys/plugin-GUI/Plugins/OnlineDecoding/tensorflow"
 	],
 	"file_history":
 	[
+		"/home/mobshamilton/OpenEphys/plugin-GUI/Plugins/OnlineDecoding/tensorflow/.gitignore",
 		"/home/mobshamilton/OpenEphys/plugin-GUI/Plugins/PluginRules.cmake",
 		"/home/mobshamilton/OpenEphys/plugin-GUI/open-ephys-GUI.sublime-project",
 		"/home/mobshamilton/OpenEphys/plugin-GUI/Plugins/OnlineDecoding/SpikeSorterWithStim/SpikeSortBoxesWithStim.cpp",
@@ -768,7 +784,7 @@
 						"translation.y": 2658.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -777,15 +793,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2595,
+						"buffer_size": 4171,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								869,
-								869
+								3576,
+								3576
 							]
 						],
 						"settings":
@@ -794,10 +810,38 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 153.0,
+						"translation.y": 969.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Plugins/OnlineDecoding/tensorflow/CMakeLists.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1296,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1296,
+								1296
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CMake/CMake.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]

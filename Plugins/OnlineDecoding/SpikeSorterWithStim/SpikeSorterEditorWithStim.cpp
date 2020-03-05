@@ -386,6 +386,7 @@ void SpikeSorterEditorWithStim::buttonEvent(Button* button)
         //updateAdvancerList();
         PopupMenu probeMenu;
         probeMenu.addItem(1,"Single ElectrodeWithStim");
+        probeMenu.addItem(-1,"Single ElectrodeWithoutStim");
         probeMenu.addItem(2,"Stereotrode");
         probeMenu.addItem(3,"Tetrode");
         PopupMenu depthprobeMenu;
@@ -411,6 +412,12 @@ void SpikeSorterEditorWithStim::buttonEvent(Button* button)
             case 1:
                 ProbeType = "Single ElectrodeWithStim";
                 nChansPerElectrode = 1;
+                nElectrodes = 1;
+                firstElectrodeOffset=0;
+                break;
+            case -1:
+                ProbeType = "Single ElectrodeWithoutStim";
+                nChansPerElectrode = -1;
                 nElectrodes = 1;
                 firstElectrodeOffset=0;
                 break;

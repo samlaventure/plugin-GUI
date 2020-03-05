@@ -259,7 +259,7 @@ ElectrodeWithStim::ElectrodeWithStim(int ID, UniqueIDgeneratorWithStim* uniqueID
 	sourceNodeId_ = sourceId;
 	sourceSubIdx = subIdx;
 
-    numChannels = _numChannels;
+    numChannels = abs(_numChannels);
     prePeakSamples = pre;
     postPeakSamples = post;
 
@@ -289,6 +289,7 @@ ElectrodeWithStim::ElectrodeWithStim(int ID, UniqueIDgeneratorWithStim* uniqueID
     isMonitored = false;
 
     internalClock = -1;
+    isExcluded = _numChannels < 0;
 }
 
 void ElectrodeWithStim::resizeWaveform(int numPre, int numPost)
@@ -453,11 +454,12 @@ void SpikeSorterWithStim::addElectrode(ElectrodeWithStim* newElectrode)
     mut.exit();
 }
 
-bool SpikeSorterWithStim::addElectrode(int nChans, String name, double Depth)
+bool SpikeSorterWithStim::addElectrode(int inChans, String name, double Depth)
 {
 
     mut.enter();
     int firstChan;
+    int nChans = abs(inChans);
 
     if (electrodes.size() == 0)
     {
@@ -479,7 +481,7 @@ bool SpikeSorterWithStim::addElectrode(int nChans, String name, double Depth)
     for (int k = 0; k < nChans; k++)
         chans[k] = firstChan + k;
 
-    ElectrodeWithStim* newElectrode = new ElectrodeWithStim(++uniqueID, &uniqueIDgenerator, &computingThread, name, nChans, chans, getDefaultThreshold(),
+    ElectrodeWithStim* newElectrode = new ElectrodeWithStim(++uniqueID, &uniqueIDgenerator, &computingThread, name, inChans, chans, getDefaultThreshold(),
 		numPreSamples, numPostSamples, getSampleRate(), dataChannelArray[chans[0]]->getSourceNodeID(), dataChannelArray[chans[0]]->getSubProcessorIdx());
 
     newElectrode->depthOffsetMM = Depth;
@@ -1073,7 +1075,7 @@ void SpikeSorterWithStim::process(AudioSampleBuffer& buffer)
             if ((float)electrode->internalClock/(float)sampleRate >= WINDOW_SIZE and electrode->windowComplete==false) {
                 electrode->internalClock = -1;
                 electrode->windowComplete = true;
-                electrode->spikeInWindow = electrode->atLeastOneRealSpike;
+                electrode->spikeInWindow = electrode->atLeastOneRealSpike != electrode->isExcluded;
                 electrode->atLeastOneRealSpike = false;
             }
         } // end cycle through samples
