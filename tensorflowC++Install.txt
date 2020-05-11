@@ -7,9 +7,9 @@ install Bazel v0.21.0 (https://docs.bazel.build/versions/0.21.0/install-ubuntu.h
 
 
 Now clone tensorflow github repo, select version 1.13, configure your build, and build:
-	git clone https://github.com/tensorflow/tensorflow.git
+	git clone https://github.com/twiby/tensorflow.git
 	cd tensorflow
-	git checkout r1.13
+	git checkout libc++
 	./configure
 	bazel build -c opt //tensorflow:libtensorflow_cc.so
 
@@ -43,3 +43,5 @@ to finish installing, you need to copy some files in /usr/local/lib and /usr/loc
 	cp bazel-bin/tensorflow/libtensorflow_cc.so /usr/local/lib
 	cp bazel-bin/tensorflow/libtensorflow_framework.so /usr/local/lib
 	cp /tmp/proto/lib/libprotobuf.a /usr/local/lib
+
+run "ldconfig" as root.

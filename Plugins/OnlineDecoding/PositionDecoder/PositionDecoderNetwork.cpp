@@ -26,7 +26,7 @@ PositionDecoderNetwork::PositionDecoderNetwork(std::string path, std::vector<std
 								tensorflow::Tensor(tensorflow::DT_FLOAT, tensorflow::TensorShape({0, (int) channels.at(group).size(), 32}))});
 
 	}
-	sessionInput.push_back({"bayesianDecoder/binTime:0", tensorflow::Tensor(tensorflow::DT_FLOAT, tensorflow::TensorShape())});
+	// sessionInput.push_back({"bayesianDecoder/binTime:0", tensorflow::Tensor(tensorflow::DT_FLOAT, tensorflow::TensorShape())});
 
 	sessionOutputTensorName.push_back("bayesianDecoder/positionProba:0");
 	sessionOutputTensorName.push_back("bayesianDecoder/positionGuessed:0");
