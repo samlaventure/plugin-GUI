@@ -93,6 +93,7 @@ public:
         Continuous signals arrive in the "buffer" variable, event data (such as TTLs
         and spikes) is contained in the "events" variable.
     */
+    void decode ();
     void process (AudioSampleBuffer& buffer) override;
     void handleSpike(const SpikeChannel* spikeInfo, const MidiMessage& event, int samplePosition) override;
     void handleEvent(const EventChannel* eventInfo, const MidiMessage& event, int samplePosition) override;
@@ -129,14 +130,15 @@ private:
 
     String jsonPath;
 
+    float sampleRate;
     int nSamplesInCurrentWindow;
 
     std::vector<int> groups;
     std::vector<std::vector<uint>> channels;
     ScopedPointer<PositionDecoderNetwork> decoder;
 
-    SleepState sleepStateSelection, currentSleepState;
     int currentSleepStateLength = 0;
+    SleepState sleepStateSelection, currentSleepState;
 
     OnlineDecoding::SignalBuffer signalBuffer;
     OwnedArray<OnlineDecoding::Spike> spikesInWindow;

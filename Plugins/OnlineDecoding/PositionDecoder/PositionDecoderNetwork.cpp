@@ -142,7 +142,7 @@ void PositionDecoderNetwork::addSpike(std::vector<std::vector<float>>& data, int
 	}
 }
 
-OnlineDecoding::DecodingResults* PositionDecoderNetwork::inferPosition(float windowLength)
+OnlineDecoding::DecodingResults* PositionDecoderNetwork::inferPosition()
 {
 	// Concatenate spikes if needed
 	for (uint group=0; group<channels.size(); ++group) {

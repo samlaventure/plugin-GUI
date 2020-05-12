@@ -57,7 +57,7 @@ public:
 	PositionDecoderNetwork(std::string path, std::vector<std::vector<uint>> inChannels);
 	void addSpike (std::vector<std::vector<float>>& data, int group);
 	void clearOutput();
-	OnlineDecoding::DecodingResults* inferPosition(float windowLength);
+	OnlineDecoding::DecodingResults* inferPosition();
 };
 
 #endif // POSITIONMOBSNEURALNETS_H

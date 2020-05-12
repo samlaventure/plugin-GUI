@@ -130,6 +130,7 @@ void PositionDecoderProcessor::setSleepState(SleepState newSleepState)
 
 void PositionDecoderProcessor::startAcquisition()
 {
+    sampleRate = getDataChannel(channels.at(0).at(0))->getSampleRate();
 }
 
 void PositionDecoderProcessor::updateSettings()
@@ -252,6 +253,10 @@ void PositionDecoderProcessor::process (AudioSampleBuffer& buffer)
     for (auto& spk: toDelete) spikesInWindow.removeObject(spk);
     for (auto& spk: spikesInWindow) {
         if (spk->ready) {
+            if (nSamplesInCurrentWindow + spk->peakSample >= WINDOW_LENGTH * sampleRate) {
+                decode();
+                nSamplesInCurrentWindow -= WINDOW_LENGTH * sampleRate;
+            }
             decoder->addSpike(spk->samples, spk->group);
             toDelete.push_back(spk);
         }
@@ -270,25 +275,28 @@ void PositionDecoderProcessor::process (AudioSampleBuffer& buffer)
 
     nSamplesInCurrentWindow += getNumSamples(channels.at(0).at(0));
 
-    if (nSamplesInCurrentWindow >= WINDOW_LENGTH * getDataChannel(channels.at(0).at(0))->getSampleRate()) {
-
-        output = decoder->inferPosition(nSamplesInCurrentWindow);    
-
-        MetaDataValueArray md;
-        md.add(new MetaDataValue(MetaDataDescriptor::FLOAT, 3, output->getValues()));
-
-        if (checkSleepState() and checkOutput()) {
-            TTLEventPtr newTTL = TTLEvent::createTTLEvent(ttlChannel, getTimestamp(0), &ttlMessageUp, 1, md, 0);
-            addEvent(ttlChannel, newTTL, 0);
-        }
-
-        TTLEventPtr newTTL2 = TTLEvent::createTTLEvent(ttlChannel, getTimestamp(0) + getNumSamples(0) - 1, &ttlMessageDown, 1, md, 0);
-        addEvent(ttlChannel, newTTL2, getNumSamples(0) - 1);
-
+    if (nSamplesInCurrentWindow >= WINDOW_LENGTH * sampleRate) {
+        decode();
         spikesInWindow.clear();
-        decoder->clearOutput();
-        nSamplesInCurrentWindow = 0;
+        nSamplesInCurrentWindow -= WINDOW_LENGTH * sampleRate;
     }
+}
+
+void PositionDecoderProcessor::decode()
+{
+    output = decoder->inferPosition();
+
+    MetaDataValueArray md;
+    md.add(new MetaDataValue(MetaDataDescriptor::FLOAT, 3, output->getValues()));
+
+    if (checkSleepState() and checkOutput()) {
+        TTLEventPtr newTTL = TTLEvent::createTTLEvent(ttlChannel, getTimestamp(0), &ttlMessageUp, 1, md, 0);
+        addEvent(ttlChannel, newTTL, 0);
+    }
+    TTLEventPtr newTTL2 = TTLEvent::createTTLEvent(ttlChannel, getTimestamp(0) + getNumSamples(0) - 1, &ttlMessageDown, 1, md, 0);
+    addEvent(ttlChannel, newTTL2, getNumSamples(0) - 1);
+
+    decoder->clearOutput();
 }
 
 
