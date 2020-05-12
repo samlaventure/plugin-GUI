@@ -174,41 +174,35 @@ OnlineDecoding::DecodingResults* PositionDecoderNetwork::inferPosition(float win
 
 
 
-OnlineDecoding::DecodingResults::DecodingResults(double& inX, double& inY, double& inStdX, double& inStdY)
-	: X(inX), Y(inY), stdX(inStdX), stdY(inStdY), positionProba(positionProbaAsArray(nullptr))
+OnlineDecoding::DecodingResults::DecodingResults(float& inX, float& inY, float& inStd)
+	: X(inX), Y(inY), stdDev(inStd), positionProba(positionProbaAsArray(nullptr))
 {
 	values[0] = X;
 	values[1] = Y;
-	values[2] = stdDev();
+	values[2] = stdDev;
 }
 
 OnlineDecoding::DecodingResults::DecodingResults(std::vector<tensorflow::Tensor>* networkOutput)
-	: X(networkOutput->at(1).tensor<double,1>()(0)),
-	Y(networkOutput->at(1).tensor<double,1>()(1)),
-	stdX(networkOutput->at(2).tensor<double,1>()(0)),
-	stdY(networkOutput->at(2).tensor<double,1>()(1)),
+	: X(networkOutput->at(1).tensor<float,1>()(0)),
+	Y(networkOutput->at(1).tensor<float,1>()(1)),
+	stdDev(networkOutput->at(2).tensor<float,1>()(0)),
 	positionProba(positionProbaAsArray(networkOutput))
 {
 	values[0] = X;
 	values[1] = Y;
-	values[2] = stdDev();
+	values[2] = stdDev;
 }
 
-double OnlineDecoding::DecodingResults::stdDev()
+std::vector<std::vector<float>> OnlineDecoding::DecodingResults::positionProbaAsArray(std::vector<tensorflow::Tensor>* networkOutput)
 {
-	return sqrt(stdX*stdX + stdY*stdY);
-}
-
-std::vector<std::vector<double>> OnlineDecoding::DecodingResults::positionProbaAsArray(std::vector<tensorflow::Tensor>* networkOutput)
-{
-	if (networkOutput == nullptr) return std::vector<std::vector<double>>(45, std::vector<double>(45, 0.));
+	if (networkOutput == nullptr) return std::vector<std::vector<float>>(45, std::vector<float>(45, 0.));
 	else {
-		std::vector<std::vector<double>> res;
+		std::vector<std::vector<float>> res;
 		res.resize(45);
 		for (int x=0; x<45; ++x) {
 			res[x].resize(45);
 			for (int y=0; y<45; ++y) {
-				res[x][y] = networkOutput->at(0).tensor<double,2>()(x,y);
+				res[x][y] = networkOutput->at(0).tensor<float,2>()(x,y);
 			}
 		}
 		return res;

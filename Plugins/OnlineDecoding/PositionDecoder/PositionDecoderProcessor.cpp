@@ -166,7 +166,7 @@ bool PositionDecoderProcessor::checkOutput()
 
     if (output->X < editor->getXlowBound() or output->X > editor->getXhighBound()) return false;
     if (output->Y < editor->getYlowBound() or output->Y > editor->getYhighBound()) return false;
-    if (output->stdDev() < editor->getStdLowBound() or output->stdDev() > editor->getStdHighBound()) return false;
+    if (output->stdDev < editor->getStdLowBound() or output->stdDev > editor->getStdHighBound()) return false;
 
     return true;
 }

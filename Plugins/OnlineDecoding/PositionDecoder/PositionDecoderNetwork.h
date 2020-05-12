@@ -16,18 +16,16 @@
 namespace OnlineDecoding {
 	struct DecodingResults
 	{
-		DecodingResults(double& inX, double& inY, double& inStdX, double& inStdY);
+		DecodingResults(float& inX, float& inY, float& inStd);
 		DecodingResults(std::vector<tensorflow::Tensor>* netWorkOutput);
 		const void* getValues() {return values;}
-		const double X;
-		const double Y;
-		const double stdX;
-		const double stdY;
-		const std::vector<std::vector<double>> positionProba;
-		double stdDev();
+		const float X;
+		const float Y;
+		const float stdDev;
+		const std::vector<std::vector<float>> positionProba;
 	private:
-		double values[3];
-		static std::vector<std::vector<double>> positionProbaAsArray(std::vector<tensorflow::Tensor>* networkOutput);
+		float values[3];
+		static std::vector<std::vector<float>> positionProbaAsArray(std::vector<tensorflow::Tensor>* networkOutput);
 	};
 }
 
