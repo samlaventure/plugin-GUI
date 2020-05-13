@@ -52,6 +52,12 @@ add_sources(${PLUGIN_NAME}
 	PositionDecoder/PositionDecoderProcessorVisualizerContentComponent.h
 	PositionDecoder/PositionDecoderNetwork.cpp
 	PositionDecoder/PositionDecoderNetwork.h
+	DefaultFilter/DefaultFilter.cpp
+	DefaultFilter/DefaultFilter.h
+	DefaultFilter/DefaultFilterEditor.cpp
+	DefaultFilter/DefaultFilterEditor.h
+	DefaultFilter/DefaultFilterProcessor.cpp
+	DefaultFilter/DefaultFilterProcessor.h
 	)
 
 find_package(Git QUIET)

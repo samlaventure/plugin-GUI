@@ -26,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "ClusterDecoder/ClusterDecoderProcessor.h"
 #include "PositionDecoder/PositionDecoderProcessor.h"
 #include "SpikeSorterWithStim/SpikeSorterWithStim.h"
+#include "DefaultFilter/DefaultFilterProcessor.h"
 #include <string>
 #ifdef WIN32
 #include <Windows.h>
@@ -35,7 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 using namespace Plugin;
-#define NUM_PLUGINS 4
+#define NUM_PLUGINS 5
 
 extern "C" EXPORT void getLibInfo(Plugin::LibraryInfo* info)
 {
@@ -72,6 +73,12 @@ extern "C" EXPORT int getPluginInfo(int index, Plugin::PluginInfo* info)
 		info->processor.name = "Spk Srt + Stim";
 		info->processor.type = Plugin::FilterProcessor;
 		info->processor.creator = &(Plugin::createProcessor<SpikeSorterWithStim>);
+		break;
+	case 4:
+		info->type = Plugin::PLUGIN_TYPE_PROCESSOR;
+		info->processor.name = "Default Filter";
+		info->processor.type = Plugin::FilterProcessor;
+		info->processor.creator = &(Plugin::createProcessor<DefaultFilterProcessor>);
 		break;
 	default:
 		return -1;
