@@ -104,13 +104,17 @@ void ArduinoOutput::handleEvent (const EventChannel* eventInfo, const MidiMessag
     {
 		TTLEventPtr ttl = TTLEvent::deserializeFromMessage(event, eventInfo);
 
-        //int eventNodeId = *(dataptr+1);
         const int eventId         = ttl->getState() ? 1: 0;
         const int eventChannel    = ttl->getChannel();
 
-        // std::cout << "Received event from " << eventNodeId
-        //           << " on channel " << eventChannel
-        //           << " with value " << eventId << std::endl;
+        if (ttl->getChannelInfo()->getSourceName()!="Spk Srt + Stim" and \
+            ttl->getChannelInfo()->getSourceName()!="Position Decoder" and \
+            ttl->getChannelInfo()->getSourceName()!="Cluster Decoder"){
+            return;
+        }
+
+        // std::cout << " on channel " << ttl->getChannelInfo()->getSourceName();
+        // std::cout << " with value " << eventId << std::endl;
 
         if (eventChannel == gateChannel)
         {
