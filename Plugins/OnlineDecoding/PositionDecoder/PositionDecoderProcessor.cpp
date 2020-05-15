@@ -254,7 +254,7 @@ void PositionDecoderProcessor::process (AudioSampleBuffer& buffer)
     for (auto& spk: spikesInWindow) {
         if (spk->ready) {
             if (nSamplesInCurrentWindow + spk->peakSample >= WINDOW_LENGTH * sampleRate) {
-                decode();
+                decode(getTimestamp(channels.at(0).at(0)) + WINDOW_LENGTH * sampleRate - nSamplesInCurrentWindow);
                 nSamplesInCurrentWindow -= WINDOW_LENGTH * sampleRate;
             }
             decoder->addSpike(spk->samples, spk->group);
@@ -276,13 +276,14 @@ void PositionDecoderProcessor::process (AudioSampleBuffer& buffer)
     nSamplesInCurrentWindow += getNumSamples(channels.at(0).at(0));
 
     if (nSamplesInCurrentWindow >= WINDOW_LENGTH * sampleRate) {
-        decode();
+        decode(getTimestamp(channels.at(0).at(0)) + getNumSamples(channels.at(0).at(0)) - \
+            (nSamplesInCurrentWindow - WINDOW_LENGTH * sampleRate));
         spikesInWindow.clear();
         nSamplesInCurrentWindow -= WINDOW_LENGTH * sampleRate;
     }
 }
 
-void PositionDecoderProcessor::decode()
+void PositionDecoderProcessor::decode(int ts)
 {
     output = decoder->inferPosition();
 
@@ -290,10 +291,10 @@ void PositionDecoderProcessor::decode()
     md.add(new MetaDataValue(MetaDataDescriptor::FLOAT, 3, output->getValues()));
 
     if (checkSleepState() and checkOutput()) {
-        TTLEventPtr newTTL = TTLEvent::createTTLEvent(ttlChannel, getTimestamp(0), &ttlMessageUp, 1, md, 0);
+        TTLEventPtr newTTL = TTLEvent::createTTLEvent(ttlChannel, ts, &ttlMessageUp, 1, md, 0);
         addEvent(ttlChannel, newTTL, 0);
     }
-    TTLEventPtr newTTL2 = TTLEvent::createTTLEvent(ttlChannel, getTimestamp(0) + getNumSamples(0) - 1, &ttlMessageDown, 1, md, 0);
+    TTLEventPtr newTTL2 = TTLEvent::createTTLEvent(ttlChannel, ts, &ttlMessageDown, 1, md, 0);
     addEvent(ttlChannel, newTTL2, getNumSamples(0) - 1);
 
     decoder->clearOutput();

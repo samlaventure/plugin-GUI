@@ -164,7 +164,7 @@ OnlineDecoding::DecodingResults* PositionDecoderNetwork::inferPosition()
 	if (!status.ok()) throw std::runtime_error("Error when evaluationg : " + status.ToString());
 
 	// extract results
-	OnlineDecoding::DecodingResults* results = new OnlineDecoding::DecodingResults(&sessionOutput);
+	results = new OnlineDecoding::DecodingResults(&sessionOutput);
 
 	clearOutput();
 	return results;

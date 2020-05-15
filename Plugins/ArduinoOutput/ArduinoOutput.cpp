@@ -126,10 +126,12 @@ void ArduinoOutput::handleEvent (const EventChannel* eventInfo, const MidiMessag
             {
                 if (eventId == 0)
                 {
+                    std::cout << "DOWN" << std::endl;
                     arduino.sendDigital (outputChannel, ARD_LOW);
                 }
                 else
                 {
+                    std::cout << "UP" << std::endl;
                     arduino.sendDigital (outputChannel, ARD_HIGH);
                 }
             }

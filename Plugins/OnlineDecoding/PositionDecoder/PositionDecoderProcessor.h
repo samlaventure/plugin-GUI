@@ -93,7 +93,7 @@ public:
         Continuous signals arrive in the "buffer" variable, event data (such as TTLs
         and spikes) is contained in the "events" variable.
     */
-    void decode ();
+    void decode (int ts);
     void process (AudioSampleBuffer& buffer) override;
     void handleSpike(const SpikeChannel* spikeInfo, const MidiMessage& event, int samplePosition) override;
     void handleEvent(const EventChannel* eventInfo, const MidiMessage& event, int samplePosition) override;

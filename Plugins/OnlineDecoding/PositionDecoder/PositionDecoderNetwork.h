@@ -53,6 +53,8 @@ private:
 	std::vector<tensorflow::Tensor>                               sessionOutput;
 	std::vector<std::string>                                      sessionOutputTensorName;
 
+	OnlineDecoding::DecodingResults*                              results;
+
 public:
 	PositionDecoderNetwork(std::string path, std::vector<std::vector<uint>> inChannels);
 	void addSpike (std::vector<std::vector<float>>& data, int group);
