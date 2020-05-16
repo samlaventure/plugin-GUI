@@ -182,13 +182,20 @@ bool PositionDecoderProcessor::checkSleepState()
 
 void PositionDecoderProcessor::handleSpike(const SpikeChannel* spikeInfo, const MidiMessage& event, int samplePosition)
 {
-
     SpikeEventPtr newSpike = SpikeEvent::deserializeFromMessage(event, spikeInfo);
+    int group = groups.at(getSpikeChannelIndex(newSpike));
+    for (int i=spikesInWindow.size()-1; i>=0; i--) {
+        if (samplePosition > spikesInWindow[i]->peakSample + 15) {
+            break;
+        } else if (group == spikesInWindow[i]->group) {
+            return;
+        }
+    }
     spikesInWindow.add( 
         new OnlineDecoding::Spike(
             getSpikeChannelIndex(newSpike), 
             samplePosition, 
-            groups.at(getSpikeChannelIndex(newSpike)),
+            group,
             channels.at(groups.at(getSpikeChannelIndex(newSpike))).size()) );
 
     return;
