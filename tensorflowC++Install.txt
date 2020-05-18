@@ -11,7 +11,7 @@ Now clone tensorflow github repo, select version 1.13, configure your build, and
 	cd tensorflow
 	git checkout libc++
 	./configure
-	bazel build -c opt //tensorflow:libtensorflow_cc.so
+	bazel build -c opt --copt=-march=native --copt=-mfpmath=both //tensorflow:libtensorflow_cc.so
 
 Build proto:
 	mkdir /tmp/proto
