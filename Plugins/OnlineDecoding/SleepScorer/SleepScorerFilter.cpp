@@ -33,6 +33,18 @@ void swap(SleepScorerFilter& first, SleepScorerFilter& second)
 
 }
 
+void getFolderPath(char *c, int size)
+{
+	bool test = c[0]=='/';
+	for (int i=size-1; i>0; i--) {
+		if (c[i-1] == '/') {
+			return;
+		} else {
+			c[i-1] = c[i];
+		}
+	}
+}
+
 
 
 
@@ -107,8 +119,10 @@ void SleepScorerFilter::setFilter()
 
     if (filterType == UndeclaredRhythm) return;
 
-    char  path[100] = "";
-    strcat(path,"../Plugins/OnlineDecoding/SleepScorer/sleepScoringFilters/");
+    char path[250] = "";
+    int bytes = readlink("/proc/self/exe", path, 100);
+    getFolderPath(path, sizeof(path));
+    strcat(path,"../../Plugins/OnlineDecoding/SleepScorer/sleepScoringFilters/");
 
     switch(filterType) {
     case UndeclaredRhythm:
