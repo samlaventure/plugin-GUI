@@ -1,0 +1,34 @@
+clone the git repo (here v0.4.5), https://github.com/MobsLab/plugin-GUI.git
+in Resources/Scripts run
+	sudo ./install_linux_dependencies.sh
+in same directory,
+	sudo cp 40-open-ephys.rules /etc/udev/rules.d
+	sudo service udev restart
+
+on U14, you maybe don't have a correct version of g++
+install g++-5:
+	sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+	sudo apt-get update
+	sudo apt-get upgrade
+	sudo apt-get dist-upgrade
+	sudo apt-get install g++-5
+
+
+go to "Build" directory:
+	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++-5 ..
+
+
+then you can run "make" in Build (or "make -B" to be sure to recompile everything or "make -j5" to paralellize on 5 cpu)
+the binary is in Build/Release, enjoy !
+
+
+((If you can't see the two plugins related to INTAN, you need to change the Build/Release/shared/libokFrontPanel.so.
+A working version is available in ~/Dropbox/Kteam/intanMobsSource/proFileExample/libokFrontPanel.so)) (it happens)
+
+To use the OnlineDecoding library, 
+	git checkout onlineDecoding
+You need a library to compile and use this : 
+tensorflow compiled for C++ (see tensorflowC++Install.txt)
+
+after that got to Build and rerun the cmake and make command !
+

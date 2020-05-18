@@ -26,7 +26,7 @@ void DefaultFilter::setCutOffFreq(float cutOff)
 
 void DefaultFilter::setParameters()
 {
-	a = std::exp(-2 * PI * cutOffFreq / sampleFreq);
+	a = exp(-2 * PI * cutOffFreq / sampleFreq);
 	b = 1 - a;
 	state = 0.f;
 }
