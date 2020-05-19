@@ -33,8 +33,8 @@ class PositionDecoderNetwork
 {
 private:
 	void loadDecoderGraph(std::string *pathToGraph, std::string *checkpointPath);
-	void loadConcatenatorGraph(int nNodes);
-	void addConcatenatorNode(int graph);
+	// void loadConcatenatorGraph(int nNodes);
+	// void addConcatenatorNode(int graph);
 
 	std::vector<std::vector<uint>> channels;
 
@@ -43,12 +43,14 @@ private:
 	ScopedPointer<tensorflow::Session>                            mainSession;
 	ScopedPointer<tensorflow::ClientSession>                      concatSession;
 
-	std::vector<int>                                              nSpikes;
+	int                                                           nSpikes;
+	// std::vector<int>                                              nSpikes;
 	std::vector<tensorflow::ClientSession::FeedType>              concatFeedDict;
 	std::vector<std::vector<tensorflow::Tensor>>                  spikeTensors;
 	std::vector<std::vector<tensorflow::Output>>                  spikePlaceholders;
 	std::vector<std::vector<tensorflow::Output>>                  concatenators;
 
+	std::vector<tensorflow::Tensor>                               dataTensors;
 	std::vector<std::pair<std::string, tensorflow::Tensor>>       sessionInput;
 	std::vector<tensorflow::Tensor>                               sessionOutput;
 	std::vector<std::string>                                      sessionOutputTensorName;

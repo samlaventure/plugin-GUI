@@ -293,6 +293,7 @@ void PositionDecoderProcessor::process (AudioSampleBuffer& buffer)
 void PositionDecoderProcessor::decode(int ts)
 {
     output = decoder->inferPosition();
+    std::cout << "x" << output->X << " y" << output->Y << std::endl;
 
     MetaDataValueArray md;
     md.add(new MetaDataValue(MetaDataDescriptor::FLOAT, 3, output->getValues()));
@@ -304,7 +305,7 @@ void PositionDecoderProcessor::decode(int ts)
     TTLEventPtr newTTL2 = TTLEvent::createTTLEvent(ttlChannel, ts, &ttlMessageDown, 1, md, 0);
     addEvent(ttlChannel, newTTL2, getNumSamples(0) - 1);
 
-    decoder->clearOutput();
+    // decoder->clearOutput();
 }
 
 
