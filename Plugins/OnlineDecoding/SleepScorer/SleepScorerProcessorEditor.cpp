@@ -67,6 +67,14 @@ void SleepScorerProcessorEditor::editSleepScoringDisplay(const String& newSleepS
 {
     content.setSleepScoringDisplay(newSleepState);
 }
+void SleepScorerProcessorEditor::editParametersDisplay(int gammaChannel, int thetaChannel, double gammaThreshold, double thetaThreshold)
+{
+    content.setSleepScoringParametersDisplay(gammaChannel, thetaChannel, gammaThreshold, thetaThreshold);
+    getProcessor()->setParameter(2, gammaChannel);
+    getProcessor()->setParameter(3, thetaChannel);
+    getProcessor()->setParameter(0, gammaThreshold);
+    getProcessor()->setParameter(1, thetaThreshold);
+}
 
 void SleepScorerProcessorEditor::resized()
 {

@@ -197,6 +197,13 @@ void SleepScorerProcessorContentComponent::setSleepScoringDisplay(const String& 
 {
     sleepstate->setText(newSleepState, dontSendNotification);
 }
+void SleepScorerProcessorContentComponent::setSleepScoringParametersDisplay(int gammaChannel, int thetaChannel, double gammaThreshold, double thetaThreshold)
+{
+    gammaChannelEntry->setText(String(gammaChannel));
+    thetaChannelEntry->setText(String(thetaChannel));
+    gammaThresholdEntry->setText(String(gammaThreshold));
+    thetaThresholdEntry->setText(String(thetaThreshold));
+}
 //[/MiscUserCode]
 
 

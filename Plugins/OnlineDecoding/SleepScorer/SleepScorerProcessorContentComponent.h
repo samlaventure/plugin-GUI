@@ -44,6 +44,7 @@ public:
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
     void setSleepScoringDisplay(const String& newSleepState);
+    void setSleepScoringParametersDisplay(int gammaChannel, int thetaChannel, double gammaThreshold, double thetaThreshold);
     //[/UserMethods]
 
     void paint (Graphics& g) override;

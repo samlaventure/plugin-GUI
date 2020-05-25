@@ -53,6 +53,7 @@ public:
     */
 
     void editSleepScoringDisplay(const String& newSleepState);
+    void editParametersDisplay(int gammaChannel, int thetaChannel, double gammaThreshold, double thetaThreshold);
 
     /** This method executes each time editor is resized. */
     void resized() override;

@@ -104,8 +104,8 @@ private:
     float newThetaSample = .0;
 
     bool filtersReady = false;
-    double gammaThreshold = 65.0;
-    double thetaThreshold = 4.0;
+    double gammaThreshold = 0.0;
+    double thetaThreshold = 0.0;
     int gammaChannel = 0;
     int thetaChannel = 0;
     double sampleRate = .0;

@@ -234,6 +234,10 @@ void SleepScorerProcessor::saveCustomParametersToXml (XmlElement* parentElement)
 {
     XmlElement* mainNode = parentElement->createNewChildElement ("SleepScorerProcessor");
     mainNode->setAttribute ("numParameters", getNumParameters());
+    mainNode->setAttribute ("gammaThreshold", gammaThreshold);
+    mainNode->setAttribute ("thetaThreshold", thetaThreshold);
+    mainNode->setAttribute ("gammaChannel", gammaChannel);
+    mainNode->setAttribute ("thetaChannel", thetaChannel);
 
     // Open Ephys Plugin Generator will insert generated code to save parameters here. Don't edit this section.
     //[OPENEPHYS_PARAMETERS_SAVE_SECTION_BEGIN]
@@ -270,6 +274,11 @@ void SleepScorerProcessor::loadCustomParametersFromXml()
         if (mainNode->hasTagName ("SleepScorerProcessor"))
         {
             int parameterIdx = -1;
+            gammaThreshold = mainNode->getDoubleAttribute("gammaThreshold");
+            thetaThreshold = mainNode->getDoubleAttribute("thetaThreshold");
+            gammaChannel = mainNode->getIntAttribute("gammaChannel");
+            thetaChannel = mainNode->getIntAttribute("thetaChannel");
+            ((SleepScorerProcessorEditor*)getEditor())->editParametersDisplay(gammaChannel, thetaChannel, gammaThreshold, thetaThreshold);
 
             forEachXmlChildElement (*mainNode, parameterNode)
             {
