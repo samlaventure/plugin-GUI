@@ -79,6 +79,8 @@ private:
     /** An open-frameworks Arduino object. */
     ofArduino arduino;
 
+    int nTTL = 0;
+
     bool state;
     bool acquisitionIsActive;
     bool deviceSelected;
