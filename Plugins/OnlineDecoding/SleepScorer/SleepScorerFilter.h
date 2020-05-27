@@ -24,7 +24,8 @@ enum SleepState : short {
 	undefinedSleepState = 1, // We avoid zeros to use these IDs in a juce::ComboBox
 	Wake,
 	NREM,
-	REM
+	REM,
+	Sleep
 };
 
 struct SleepScorerFilter

@@ -69,6 +69,7 @@ PositionDecoderProcessorEditor::PositionDecoderProcessorEditor (GenericProcessor
     sleepStateComboBox->addItem(SleepScorerProcessor::sleepStateAsText(SleepState::Wake), SleepState::Wake);
     sleepStateComboBox->addItem(SleepScorerProcessor::sleepStateAsText(SleepState::REM), SleepState::REM);
     sleepStateComboBox->addItem(SleepScorerProcessor::sleepStateAsText(SleepState::NREM), SleepState::NREM);
+    sleepStateComboBox->addItem(SleepScorerProcessor::sleepStateAsText(SleepState::Sleep), SleepState::Sleep);
     sleepStateComboBox->setSelectedId(SleepState::undefinedSleepState);
     sleepStateComboBox->setBounds (160, 27, 71, 24);
     addAndMakeVisible (sleepStateComboBox);

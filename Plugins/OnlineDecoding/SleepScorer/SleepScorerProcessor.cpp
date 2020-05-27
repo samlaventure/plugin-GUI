@@ -153,6 +153,7 @@ const SleepState SleepScorerProcessor::sleepStateFromText(String newSleepState)
     if (newSleepState == "Wake") return Wake;
     else if (newSleepState == "REM") return REM;
     else if (newSleepState == "NREM") return NREM;
+    else if (newSleepState == "Sleep") return Sleep;
     else return undefinedSleepState;
 }
 
@@ -162,6 +163,7 @@ const char* SleepScorerProcessor::sleepStateAsText(const SleepState newSleepStat
     case Wake: return "Wake";
     case REM: return "REM";
     case NREM: return "NREM";
+    case Sleep: return "Sleep";
     case undefinedSleepState: return "Undefined";
     default: return "Undefined";
     }

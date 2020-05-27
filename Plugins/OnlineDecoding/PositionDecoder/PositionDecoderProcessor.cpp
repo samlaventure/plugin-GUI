@@ -176,6 +176,12 @@ bool PositionDecoderProcessor::checkOutput()
 bool PositionDecoderProcessor::checkSleepState()
 {
     if (sleepStateSelection == SleepState::undefinedSleepState) return true;
+    else if (sleepStateSelection == SleepState::Sleep) {
+        if (currentSleepState == SleepState::REM or currentSleepState == SleepState::NREM) {
+            if (currentSleepStateLength > 1) return true;
+            else return false;
+        } else return false;
+    }
     else if (sleepStateSelection == currentSleepState and currentSleepStateLength > 1) return true;
     else return false;
 }

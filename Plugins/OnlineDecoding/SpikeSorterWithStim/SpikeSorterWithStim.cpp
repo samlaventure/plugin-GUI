@@ -888,6 +888,12 @@ void SpikeSorterWithStim::setSleepState(const SleepState newSleepState)
 bool SpikeSorterWithStim::checkSleepState()
 {
     if (sleepStateSelection == SleepState::undefinedSleepState) return true;
+    else if (sleepStateSelection == SleepState::Sleep) {
+        if (currentSleepState == SleepState::REM or currentSleepState == SleepState::NREM) {
+            if (currentSleepStateLength > 1) return true;
+            else return false;
+        } else return false;
+    }
     else if (sleepStateSelection == currentSleepState and currentSleepStateLength > 1) return true;
     else return false;
 }
@@ -1128,7 +1134,6 @@ void SpikeSorterWithStim::sendTtlEvent(int timestamp)
 {
     if (!enableStim) return;
 
-    std::cout << "STIM" << std::endl;
     TTLEventPtr newTTL = TTLEvent::createTTLEvent(ttlChannel, timestamp, &ttlMessageUp, 1, 0);
     addEvent(ttlChannel, newTTL, 0);
 

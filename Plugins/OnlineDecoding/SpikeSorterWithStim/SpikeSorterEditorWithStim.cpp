@@ -52,6 +52,7 @@ SpikeSorterEditorWithStim::SpikeSorterEditorWithStim(GenericProcessor* parentNod
     sleepStateList->addItem(SleepScorerProcessor::sleepStateAsText(SleepState::Wake), SleepState::Wake);
     sleepStateList->addItem(SleepScorerProcessor::sleepStateAsText(SleepState::REM), SleepState::REM);
     sleepStateList->addItem(SleepScorerProcessor::sleepStateAsText(SleepState::NREM), SleepState::NREM);
+    sleepStateList->addItem(SleepScorerProcessor::sleepStateAsText(SleepState::Sleep), SleepState::Sleep);
     sleepStateList->setSelectedId(SleepState::undefinedSleepState);
     sleepStateList->addListener(this);
     sleepStateList->setBounds(200,105,90,20);
