@@ -33,6 +33,7 @@ class PositionDecoderNetwork
 {
 private:
 	void loadDecoderGraph(std::string *pathToGraph, std::string *checkpointPath);
+	void printSpikes();
 	// void loadConcatenatorGraph(int nNodes);
 	// void addConcatenatorNode(int graph);
 

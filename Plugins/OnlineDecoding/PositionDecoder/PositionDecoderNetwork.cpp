@@ -159,6 +159,21 @@ void PositionDecoderNetwork::addSpike(std::vector<std::vector<float>>& data, int
 	nSpikes += 1;
 }
 
+// For debug purposes
+void PositionDecoderNetwork::printSpikes()
+{
+	for (uint g=0; g<channels.size(); ++g) {
+		std::cout<<std::endl << "GROUP "<<g<<std::endl;
+		for (uint spk=0; spk<nSpikes; ++spk) {
+			for (uint c=0; c<channels.at(g).size(); ++c) {
+				for (uint spl=0; spl<32; spl++) {
+					std::cout << dataTensors.at(g).tensor<float, 3>()(spk, c, spl) <<",";
+				}
+			} std::cout << std::endl;
+		} std::cout << std::endl;
+	}
+}
+
 OnlineDecoding::DecodingResults* PositionDecoderNetwork::inferPosition()
 {
 	// // Concatenate spikes if needed
@@ -189,6 +204,7 @@ OnlineDecoding::DecodingResults* PositionDecoderNetwork::inferPosition()
 	// extract results
 	results = new OnlineDecoding::DecodingResults(&sessionOutput);
 
+	// printSpikes();
 	clearOutput();
 	return results;
 }
