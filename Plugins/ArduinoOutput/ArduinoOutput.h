@@ -61,6 +61,9 @@ public:
     /** Called immediately after the end of data acquisition. */
     bool disable() override;
 
+    void startRecording() override;
+    void stopRecording() override;
+
     /** Creates the ArduinoOutputEditor. */
     AudioProcessorEditor* createEditor() override;
 
@@ -84,6 +87,7 @@ private:
     bool state;
     bool acquisitionIsActive;
     bool deviceSelected;
+    bool ttlEnabled;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ArduinoOutput);
 };

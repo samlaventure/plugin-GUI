@@ -35,6 +35,7 @@ ArduinoOutput::ArduinoOutput()
     , state                 (true)
     , acquisitionIsActive   (false)
     , deviceSelected        (false)
+    , ttlEnabled            (false)
 {
     setProcessorType (PROCESSOR_TYPE_SINK);
 }
@@ -124,6 +125,8 @@ void ArduinoOutput::handleEvent (const EventChannel* eventInfo, const MidiMessag
                 state = false;
         }
 
+        if (!ttlEnabled) return;
+
         if (state)
         {
             if (inputChannel == -1 || eventChannel == inputChannel)
@@ -207,4 +210,13 @@ bool ArduinoOutput::disable()
 void ArduinoOutput::process (AudioSampleBuffer& buffer)
 {
     checkForEvents ();
+}
+
+void ArduinoOutput::startRecording()
+{
+    ttlEnabled = true;
+}
+void ArduinoOutput::stopRecording()
+{
+    ttlEnabled = false;
 }

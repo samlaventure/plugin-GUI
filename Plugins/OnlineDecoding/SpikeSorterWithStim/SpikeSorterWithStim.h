@@ -468,7 +468,6 @@ private:
     int ttlMessageUp = 1;
     int ttlMessageDown = 0;
     float sampleRate;
-    bool enableStim;
 
     bool editAll = false;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SpikeSorterWithStim);

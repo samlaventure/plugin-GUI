@@ -801,11 +801,9 @@ void SpikeSorterWithStim::startRecording()
     }
 
     mut.exit();
-    enableStim = true;
 }
 void SpikeSorterWithStim::stopRecording()
 {
-    enableStim = false;
 }
 
 // int64 SpikeSorterWithStim::getExtrapolatedHardwareTimestamp(int64 softwareTS)
@@ -1132,8 +1130,6 @@ void SpikeSorterWithStim::process(AudioSampleBuffer& buffer)
 
 void SpikeSorterWithStim::sendTtlEvent(int timestamp)
 {
-    if (!enableStim) return;
-
     TTLEventPtr newTTL = TTLEvent::createTTLEvent(ttlChannel, timestamp, &ttlMessageUp, 1, 0);
     addEvent(ttlChannel, newTTL, 0);
 
