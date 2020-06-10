@@ -946,7 +946,7 @@ void SpikeSorterWithStim::process(AudioSampleBuffer& buffer)
         while (samplesAvailable(nSamples))
         {
 
-            sampleIndex++;
+            int lastSample = sampleIndex++;
 
             // cycle through channels
             for (int chan = 0; chan < electrode->numChannels; chan++)
@@ -1075,10 +1075,11 @@ void SpikeSorterWithStim::process(AudioSampleBuffer& buffer)
 
             
 
-            electrode->internalClock++;
+            electrode->internalClock += sampleIndex - lastSample;
             if ((float)electrode->internalClock/(float)sampleRate >= WINDOW_SIZE and electrode->windowComplete==false) {
-                electrode->internalClock = -1;
+                electrode->internalClock -= WINDOW_SIZE*getDataChannel(electrode->channels[0])->getSampleRate() + 1;
                 electrode->windowComplete = true;
+                electrode->lastWindowTimestamp = getTimestamp(electrode->channels[0]) + sampleIndex - electrode->internalClock - 1;
                 electrode->spikeInWindow = electrode->atLeastOneRealSpike != electrode->isExcluded;
                 electrode->atLeastOneRealSpike = false;
             }
@@ -1122,7 +1123,7 @@ void SpikeSorterWithStim::process(AudioSampleBuffer& buffer)
             spikeOnAllElectrode &= el->spikeInWindow;
         }
     } else spikeOnAllElectrode = false;
-    if (electrodes.size()>0 and spikeOnAllElectrode and checkSleepState()) sendTtlEvent(getTimestamp(electrode->channels[0]));
+    if (electrodes.size()>0 and spikeOnAllElectrode and checkSleepState()) sendTtlEvent(electrode->lastWindowTimestamp);
 
     mut.exit();
     //printf("Exitting Spike Detector::process\n");

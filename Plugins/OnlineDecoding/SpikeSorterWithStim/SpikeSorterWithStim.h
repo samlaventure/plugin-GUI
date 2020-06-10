@@ -186,6 +186,7 @@ public:
     bool atLeastOneRealSpike = false;
     bool windowComplete = false;
     bool spikeInWindow = false;
+    int lastWindowTimestamp;
 };
 
 class ContinuousCircularBufferWithStim
