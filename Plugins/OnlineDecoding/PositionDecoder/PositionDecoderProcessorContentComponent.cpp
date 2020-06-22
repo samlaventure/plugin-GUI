@@ -37,7 +37,7 @@ PositionDecoderProcessorContentComponent::PositionDecoderProcessorContentCompone
     addAndMakeVisible (YtoText = new Label("new label", TRANS("to")));
     addAndMakeVisible (Xtext = new Label ("new label", TRANS("X bounds\n")));
     addAndMakeVisible (Ytext = new Label ("new label", TRANS("Y bounds\n")));
-    addAndMakeVisible (StdText = new Label ("new label", TRANS("stand dev\n")));
+    addAndMakeVisible (StdText = new Label ("new label", TRANS("ev. loss\n")));
     addAndMakeVisible (StdToText = new Label ("new label", TRANS("to\n")));
     setLabel(Xtext);
     setLabel(Ytext);
