@@ -100,7 +100,7 @@ void PositionDecoderProcessorContentComponent::setTextEditor(TextEditor* textEdi
     textEditor->setCaretVisible (true);
     textEditor->setPopupMenuEnabled (true);
     textEditor->setText (TRANS("0"));
-    textEditor->setInputRestrictions(5, "0123456789.");
+    textEditor->setInputRestrictions(5, "-0123456789.");
 }
 void PositionDecoderProcessorContentComponent::setLabel(Label* label)
 {
