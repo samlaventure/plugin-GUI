@@ -143,8 +143,8 @@ void PositionDecoderProcessor::updateSettings()
 
             int temp = 0, group = 0;
             while (spikeChannel >= temp + channels.at(group).size()) {
-                ++group;
                 temp += channels.at(group).size();
+                ++group;
                 if (group == channels.size()) {
                     group = -1;
                     break;
