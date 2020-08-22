@@ -15,6 +15,16 @@ Now clone tensorflow github repo, select version 1.13, configure your build, and
 
 Build proto:
 	mkdir /tmp/proto
+	
+	****************
+	# Before continuing, an issue with a dead url link must be corrected
+	# The url below was found in the tensorflow/workspace.bzl file. 
+	gedit tensorflow/contrib/makefile/download_dependencies.sh
+	# Paste the following over line #29: 
+	EIGEN_URL=https://mirror.bazel.build/bitbucket.org/eigen/eigen/get/9f48e814419e.tar.gz
+	# Save file (Ctrl+S)
+	****************
+	
 	tensorflow/contrib/makefile/download_dependencies.sh
 	cd tensorflow/contrib/makefile/downloads/protobuf
 	./autogen.sh
